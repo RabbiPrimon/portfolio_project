@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Portfolio - My Work{% endblock %}
+
+{% block content %}
+<!-- Portfolio Section -->
+<section class="py-5">
+    <div class="container">
+        <h1 class="display-4 fw-bold text-center mb-5">My Portfolio</h1>
+        <div class="row">
+            {% for item in portfolio_items %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    {% if item.image %}
+                        <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.title }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.title }}</h5>
+                        <p class="card-text">{{ item.description|truncatechars:100 }}</p>
+                        <p class="text-muted">{{ item.get_category_display }}</p>
+                        {% if item.video_url %}
+                            <a href="{{ item.video_url }}" target="_blank" class="btn btn-primary">View Video</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

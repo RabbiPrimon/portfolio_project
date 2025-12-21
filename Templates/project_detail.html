@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ project.title }} - Portfolio{% endblock %}
+
+{% block content %}
+<!-- Project Detail Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                {% if project.image %}
+                    <img src="{{ project.image.url }}" class="img-fluid mb-4" alt="{{ project.title }}">
+                {% endif %}
+                <h1 class="display-4 fw-bold mb-4">{{ project.title }}</h1>
+                <p class="lead mb-4">{{ project.description }}</p>
+                <div class="mb-4">
+                    <h5>Technologies Used:</h5>
+                    <p>{{ project.tech_stack }}</p>
+                </div>
+                {% if project.github_link %}
+                    <a href="{{ project.github_link }}" target="_blank" class="btn btn-primary me-2">View on GitHub</a>
+                {% endif %}
+                {% if project.live_link %}
+                    <a href="{{ project.live_link }}" target="_blank" class="btn btn-success">View Live Demo</a>
+                {% endif %}
+            </div>
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Project Details</h5>
+                        <p><strong>Status:</strong> {{ project.get_status_display }}</p>
+                        <p><strong>Created:</strong> {{ project.created_at|date:"F j, Y" }}</p>
+                        {% if project.updated_at %}
+                            <p><strong>Last Updated:</strong> {{ project.updated_at|date:"F j, Y" }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

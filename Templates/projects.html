@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Projects - Portfolio{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <h1 class="text-center mb-5">My Projects</h1>
+        <div class="row">
+            {% for project in projects %}
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                    {% if project.image %}
+                        <img src="{{ project.image.url }}" class="card-img-top" alt="{{ project.title }}" style="height: 200px; object-fit: cover;">
+                    {% else %}
+                        <div class="bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                            <i class="fas fa-project-diagram fa-3x text-secondary"></i>
+                        </div>
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ project.title }}</h5>
+                        <p class="card-text">{{ project.description|truncatechars:150 }}</p>
+                        <p class="text-muted small">
+                            <strong>Tech Stack:</strong> {{ project.tech_stack }}
+                        </p>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <div class="d-flex justify-content-between">
+                            <a href="{% url 'project_detail' project.pk %}" class="btn btn-primary btn-sm">View Details</a>
+                            <div>
+                                {% if project.github_link %}
+                                    <a href="{{ project.github_link }}" target="_blank" class="btn btn-outline-secondary btn-sm me-1">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                {% endif %}
+                                {% if project.demo_link %}
+                                    <a href="{{ project.demo_link }}" target="_blank" class="btn btn-outline-success btn-sm">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% if not projects %}
+            <div class="text-center">
+                <p class="text-muted">No projects available yet.</p>
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
