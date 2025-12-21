@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'portfolio_app',
     'rest_framework',
+    'ckeditor',
 
 ]
 

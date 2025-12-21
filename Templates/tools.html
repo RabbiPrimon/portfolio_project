@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Tools - Portfolio{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <h1 class="text-center mb-5">Tools & Technologies</h1>
+        <div class="row">
+            {% for tool in tools %}
+            <div class="col-md-3 col-sm-6 mb-4 text-center">
+                {% if tool.icon %}<i class="{{ tool.icon }} fs-2 mb-2" title="{{ tool.tooltip }}"></i>{% endif %}
+                <p>{{ tool.name }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

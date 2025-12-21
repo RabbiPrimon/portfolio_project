@@ -1,46 +1,40 @@
-# TODO List for Django Portfolio Website
+# TODO List for Django Portfolio Website Expansion
 
 ## Models and Database
-- [x] Define all models in portfolio_app/models.py (Profile, Skill, Project, Service, PortfolioItem, ContactMessage)
+- [x] Expand models.py: Add categories, icons, display_order to Skill
+- [x] Add new models: Experience, Tool, Testimonial, BlogPost, ProjectImage
 - [x] Run migrations for new models
 
 ## Admin
-- [x] Register all models in portfolio_app/admin.py with search and filters
-
-## Forms
-- [x] Create portfolio_app/forms.py with ContactForm
+- [ ] Update admin.py: Register new models, add rich text editors, image previews, filters
+- [ ] Add ProjectImageInline to ProjectAdmin
 
 ## Views
-- [x] Implement views in portfolio_app/views.py (home, about, projects, services, contact)
+- [ ] Update views.py: Add views for timeline, tools, testimonials, blog, project detail with multiple images
+- [ ] Add missing views: experience_timeline, tools, testimonials, blog, blog_detail
 
 ## URLs
-- [x] Create portfolio_app/urls.py with app-level URLs
-- [x] Update portfolio_project/urls.py to include app URLs
-
-## Settings
-- [x] Update portfolio_project/settings.py for static and media handling
+- [x] Update portfolio_app/urls.py: Add paths for new sections
 
 ## Templates
-- [x] Create Templates/base.html with Bootstrap and layout
-- [x] Create Templates/home.html
-- [x] Create Templates/about.html
-- [x] Create Templates/projects.html
-- [x] Create Templates/services.html
-- [x] Create Templates/contact.html
+- [ ] Update Templates/base.html: Switch to dark theme
+- [ ] Update Templates/home.html: Add new sections (Hero with CTA, About with details, Skills with categories, etc.)
+- [ ] Update other templates: about.html, projects.html, services.html, contact.html
+- [ ] Create new templates: timeline.html, tools.html, testimonials.html, blog.html, etc.
 
 ## Static Files
-- [x] Create static/css/style.css for custom styles
+- [ ] Enhance static/css/style.css: Dark theme, glassmorphism, animations
+
+## Settings
+- [ ] Update portfolio_project/settings.py: Ensure media handling, security
+- [ ] Add ckeditor to INSTALLED_APPS
 
 ## Configuration Files
-- [x] Create requirements.txt
-- [x] Create .env.example
-- [x] Create README.md with setup instructions
-
-## Extras
-- [x] Create Templates/404.html and Templates/500.html
-- [x] Create sitemap.xml and robots.txt
+- [ ] Create requirements.txt
+- [ ] Create .env.example
+- [ ] Create README.md with setup instructions
 
 ## Testing and Deployment Prep
-- [x] Test all views and templates
-- [x] Ensure responsive design
-- [x] Run collectstatic for deployment
+- [ ] Test all new views and templates
+- [ ] Ensure responsive design and dark theme
+- [ ] Run collectstatic for deployment

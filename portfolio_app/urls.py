@@ -1,12 +1,16 @@
 from django.urls import path
-from portfolio_app.views import *
+from .views import *
 
 urlpatterns = [
     path('', home, name='home'),
     path('about/', about, name='about'),
-    path('projects/',projects, name='projects'),
+    path('experience/', experience_timeline, name='experience'),
+    path('projects/', projects, name='projects'),
     path('projects/<int:pk>/', project_detail, name='project_detail'),
     path('services/', services, name='services'),
-    path('portfolio/', portfolio, name='portfolio'),
-    path('contact/',contact, name='contact'),
+    path('tools/', tools, name='tools'),
+    path('testimonials/', testimonials, name='testimonials'),
+    path('blog/', blog, name='blog'),
+    path('blog/<slug:slug>/', blog_detail, name='blog_detail'),
+    path('contact/', contact, name='contact'),
 ]
