@@ -53,7 +53,7 @@ def services(request):
     })
 
 def portfolio(request):
-    portfolio_items = PortfolioItem.objects.all()
+    portfolio_items = Project.objects.all()
     return render(request, 'portfolio.html', {
         'portfolio_items': portfolio_items,
     })

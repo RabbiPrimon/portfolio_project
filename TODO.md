@@ -6,12 +6,12 @@
 - [x] Run migrations for new models
 
 ## Admin
-- [ ] Update admin.py: Register new models, add rich text editors, image previews, filters
-- [ ] Add ProjectImageInline to ProjectAdmin
+- [x] Update admin.py: Register new models, add rich text editors, image previews, filters
+- [x] Add ProjectImageInline to ProjectAdmin
 
 ## Views
-- [ ] Update views.py: Add views for timeline, tools, testimonials, blog, project detail with multiple images
-- [ ] Add missing views: experience_timeline, tools, testimonials, blog, blog_detail
+- [x] Update views.py: Add views for timeline, tools, testimonials, blog, project detail with multiple images
+- [x] Add missing views: experience_timeline, tools, testimonials, blog, blog_detail
 
 ## URLs
 - [x] Update portfolio_app/urls.py: Add paths for new sections
@@ -20,19 +20,19 @@
 - [ ] Update Templates/base.html: Switch to dark theme
 - [ ] Update Templates/home.html: Add new sections (Hero with CTA, About with details, Skills with categories, etc.)
 - [ ] Update other templates: about.html, projects.html, services.html, contact.html
-- [ ] Create new templates: timeline.html, tools.html, testimonials.html, blog.html, etc.
+- [x] Create new templates: timeline.html (experience.html), tools.html, testimonials.html, blog.html, blog_detail.html
 
 ## Static Files
 - [ ] Enhance static/css/style.css: Dark theme, glassmorphism, animations
 
 ## Settings
-- [ ] Update portfolio_project/settings.py: Ensure media handling, security
-- [ ] Add ckeditor to INSTALLED_APPS
+- [x] Update portfolio_project/settings.py: Ensure media handling, security
+- [x] Add ckeditor to INSTALLED_APPS
 
 ## Configuration Files
-- [ ] Create requirements.txt
-- [ ] Create .env.example
-- [ ] Create README.md with setup instructions
+- [x] Create requirements.txt
+- [x] Create .env.example
+- [x] Create README.md with setup instructions
 
 ## Testing and Deployment Prep
 - [ ] Test all new views and templates

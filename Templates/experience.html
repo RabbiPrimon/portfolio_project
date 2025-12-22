@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Experience - Portfolio{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <h1 class="text-center mb-5">Professional Experience</h1>
+        <div class="timeline">
+            {% for experience in experiences %}
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <h3>{{ experience.title }}</h3>
+                    <h4>{{ experience.company }}</h4>
+                    <p class="text-muted">
+                        {{ experience.start_date|date:"M Y" }} - {% if experience.is_current %}Present{% else %}{{ experience.end_date|date:"M Y" }}{% endif %}
+                    </p>
+                    <div>{{ experience.description|safe }}</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
