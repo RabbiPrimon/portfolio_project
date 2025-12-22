@@ -5,21 +5,75 @@
 
 {% block content %}
 <style>
-    body { background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%); color: #ffffff; }
-    .glass { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); }
-    .hero { min-height: 100vh; display: flex; align-items: center; background: url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80') center/cover; position: relative; }
-    .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); }
-    .hero .container { position: relative; z-index: 1; }
-    .section { padding: 100px 0; }
-    .skill-bar { background: rgba(255,255,255,0.2); height: 10px; border-radius: 5px; overflow: hidden; }
-    .skill-fill { height: 100%; background: linear-gradient(90deg, #00d4ff, #090979); transition: width 1s ease; }
-    .timeline-item { position: relative; padding-left: 50px; margin-bottom: 30px; }
-    .timeline-item::before { content: ''; position: absolute; left: 15px; top: 0; bottom: -30px; width: 2px; background: #00d4ff; }
-    .timeline-item::after { content: ''; position: absolute; left: 10px; top: 10px; width: 10px; height: 10px; background: #00d4ff; border-radius: 50%; }
-    .card { background: rgba(255,255,255,0.1); border: none; backdrop-filter: blur(10px); transition: transform 0.3s; }
-    .card:hover { transform: translateY(-10px); }
-    .btn-custom { background: linear-gradient(45deg, #00d4ff, #090979); border: none; color: white; }
-    .btn-custom:hover { background: linear-gradient(45deg, #090979, #00d4ff); }
+    .terminal-window {
+        background: #1e1e1e;
+        border-radius: 8px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        border: 1px solid #333;
+        font-family: 'JetBrains Mono', monospace;
+        overflow: hidden;
+    }
+
+    .terminal-header {
+        background: #252526;
+        padding: 10px 15px;
+        border-bottom: 1px solid #333;
+        display: flex;
+        gap: 8px;
+    }
+
+    .terminal-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+    }
+
+    .dot-red {
+        background: #ff5f56;
+    }
+
+    .dot-yellow {
+        background: #ffbd2e;
+    }
+
+    .dot-green {
+        background: #27c93f;
+    }
+
+    .terminal-body {
+        padding: 20px;
+        color: #d4d4d4;
+    }
+
+    .code-line {
+        margin-bottom: 5px;
+    }
+
+    .keyword {
+        color: #569cd6;
+    }
+
+    /* Blue for keywords */
+    .string {
+        color: #ce9178;
+    }
+
+    /* Orange for strings */
+    .class-name {
+        color: #4ec9b0;
+    }
+
+    /* Teal for classes */
+    .function {
+        color: #dcdcaa;
+    }
+
+    /* Yellow for functions */
+    .comment {
+        color: #6a9955;
+    }
+
+    /* Green for comments */
 </style>
 
 <!-- Hero Section -->
@@ -28,33 +82,53 @@
         <div class="row align-items-center">
             <div class="col-lg-6">
                 {% if profile %}
-                    <h1 class="display-4 fw-bold mb-3">Hi, I'm {{ profile.name }}</h1>
-                    <h2 class="h3 mb-4 text-info">{{ profile.role }}</h2>
-                    <p class="lead mb-4">{{ profile.tagline }}</p>
-                    <div class="d-flex gap-3 mb-4">
-                        <a href="#contact" class="btn btn-custom btn-lg">Contact Me</a>
-                        {% if profile.github %}
-                            <a href="{{ profile.github }}" target="_blank" class="btn btn-outline-light btn-lg">View My Work</a>
-                        {% endif %}
+                <h1 class="display-4 fw-bold mb-3"><span class="text-code-purple">class</span> <span
+                        class="class-name">Developer</span>:</h1>
+                <div class="ps-4">
+                    <p class="h3 mb-2"><span class="keyword">def</span> <span class="function">__init__</span>(self):
+                    </p>
+                    <div class="ps-4 text-secondary">
+                        <p class="mb-1">self.name = <span class="string">"{{ profile.name }}"</span></p>
+                        <p class="mb-1">self.role = <span class="string">"{{ profile.role }}"</span></p>
+                        <p class="mb-1">self.bio = <span class="string">"{{ profile.tagline }}"</span></p>
+                        <p class="mb-4">self.status = <span class="keyword">True</span> <span class="comment"># Ready to
+                                code</span></p>
                     </div>
-                    <div class="social-links">
-                        {% if profile.github %}<a href="{{ profile.github }}" class="text-light me-3 fs-4"><i class="fab fa-github"></i></a>{% endif %}
-                        {% if profile.linkedin %}<a href="{{ profile.linkedin }}" class="text-light me-3 fs-4"><i class="fab fa-linkedin"></i></a>{% endif %}
-                        {% if profile.youtube %}<a href="{{ profile.youtube }}" class="text-light fs-4"><i class="fab fa-youtube"></i></a>{% endif %}
-                    </div>
+                </div>
+                <div class="d-flex gap-3 mb-4 mt-3">
+                    <a href="#contact" class="btn btn-primary btn-lg">&lt;Contact /&gt;</a>
+                    {% if profile.github %}
+                    <a href="{{ profile.github }}" target="_blank" class="btn btn-outline-secondary btn-lg">git checkout
+                        work</a>
+                    {% endif %}
+                </div>
                 {% else %}
-                    <h1 class="display-4 fw-bold">Welcome to My Portfolio</h1>
-                    <p class="lead mb-4">I'm a developer passionate about creating amazing web applications.</p>
+                <h1 class="display-4 fw-bold"> > Hello World_</h1>
+                <p class="lead mb-4 text-code-green">// Welcome to my portfolio. initializing...</p>
                 {% endif %}
             </div>
-            <div class="col-lg-6 text-center">
-                {% if profile and profile.profile_photo %}
-                    <img src="{{ profile.profile_photo.url }}" alt="{{ profile.name }}" class="img-fluid rounded-circle shadow" style="max-width: 300px; border: 5px solid rgba(255,255,255,0.2);">
-                {% else %}
-                    <div class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center mx-auto" style="width: 300px; height: 300px; border: 5px solid rgba(255,255,255,0.2);">
-                        <i class="fas fa-user fa-5x text-secondary"></i>
+            <div class="col-lg-6">
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="terminal-dot dot-red"></div>
+                        <div class="terminal-dot dot-yellow"></div>
+                        <div class="terminal-dot dot-green"></div>
                     </div>
-                {% endif %}
+                    <div class="terminal-body font-monospace">
+                        <div class="code-line"><span class="prompt">$</span> <span class="keyword">npm</span> install
+                            expertise</div>
+                        <div class="code-line text-secondary">Installing modules...</div>
+                        <div class="code-line text-code-green">[ok] Python loaded</div>
+                        <div class="code-line text-code-green">[ok] Django configures</div>
+                        <div class="code-line text-code-green">[ok] REST API endpoints ready</div>
+                        <div class="code-line"><span class="prompt">$</span> <span class="keyword">python</span>
+                            manage.py runserver</div>
+                        <div class="code-line text-secondary">Starting development server at http://127.0.0.1:8000/
+                        </div>
+                        <div class="code-line text-secondary">Quit the server with CONTROL-C.</div>
+                        <div class="code-line"><span class="prompt">$</span> _</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -65,24 +139,47 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6">
-                {% if profile and profile.profile_photo %}
-                    <img src="{{ profile.profile_photo.url }}" alt="{{ profile.name }}" class="img-fluid rounded shadow">
-                {% endif %}
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="terminal-dot dot-red"></div>
+                        <div class="terminal-dot dot-yellow"></div>
+                        <div class="terminal-dot dot-green"></div>
+                    </div>
+                    <div class="terminal-body">
+                        {% if profile and profile.profile_photo %}
+                        <img src="{{ profile.profile_photo.url }}" alt="{{ profile.name }}" class="img-fluid rounded"
+                            style="opacity: 0.9;">
+                        {% else %}
+                        <div class="text-center p-5 text-secondary">
+                            <i class="fas fa-user-secret fa-5x"></i>
+                            <p class="mt-3">No_Image_Found_Exception</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-6">
-                <h2 class="mb-4">About Me</h2>
+            <div class="col-lg-6 mt-4 mt-lg-0">
+                <h2 class="mb-4"><span class="text-code-purple">print</span>(<span class="string">"About Me"</span>)
+                </h2>
                 {% if profile %}
-                    <p class="lead">{{ profile.bio|safe }}</p>
-                    <div class="row mt-4">
+                <div class="card p-4">
+                    <p class="lead text-code-green">// {{ profile.bio|safe }}</p>
+                    <hr class="border-secondary">
+                    <div class="row">
                         <div class="col-sm-6">
-                            <p><strong>Experience:</strong> {{ profile.years_of_experience }} years</p>
-                            <p><strong>Location:</strong> {{ profile.location }}</p>
+                            <p><span class="keyword">var</span> experience = <span class="text-code-yellow">{{
+                                    profile.years_of_experience }}</span>;</p>
+                            <p><span class="keyword">const</span> location = <span class="string">"{{ profile.location
+                                    }}"</span>;</p>
                         </div>
                         <div class="col-sm-6">
-                            <p><strong>Email:</strong> {{ profile.email }}</p>
-                            <p><strong>Freelance:</strong> {% if profile.freelance_available %}Available{% else %}Not Available{% endif %}</p>
+                            <p><span class="keyword">let</span> email = <span class="string">"{{ profile.email
+                                    }}"</span>;</p>
+                            <p><span class="keyword">bool</span> freelance = <span class="keyword">{% if
+                                    profile.freelance_available %}true{% else %}false{% endif %}</span>;</p>
                         </div>
                     </div>
+                </div>
                 {% endif %}
             </div>
         </div>
@@ -90,24 +187,26 @@
 </section>
 
 <!-- Skills Section -->
-<section id="skills" class="section bg-dark">
+<section id="skills" class="section bg-secondary">
     <div class="container">
-        <h2 class="text-center mb-5">My Skills</h2>
+        <h2 class="text-center mb-5"><span class="text-code-purple">def</span> <span
+                class="function">get_skills</span>():</h2>
         <div class="row">
             {% for skill in skills %}
             <div class="col-md-6 col-lg-4 mb-4">
                 <div class="card p-3 h-100">
                     <div class="d-flex align-items-center mb-3">
-                        {% if skill.icon %}<i class="{{ skill.icon }} fs-2 me-3"></i>{% endif %}
+                        {% if skill.icon %}<i class="{{ skill.icon }} fs-2 me-3 text-code-green"></i>{% endif %}
                         <div>
                             <h5 class="mb-1">{{ skill.name }}</h5>
                             <small class="text-muted">{{ skill.category|title }}</small>
                         </div>
                     </div>
-                    <div class="skill-bar">
-                        <div class="skill-fill" style="width: {{ skill.proficiency }}%"></div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" data-width="{{ skill.proficiency }}"
+                            aria-valuenow="{{ skill.proficiency }}" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <p class="mt-2 mb-0 text-end">{{ skill.proficiency }}%</p>
+                    <p class="mt-2 mb-0 text-end font-monospace">{{ skill.proficiency }}%</p>
                 </div>
             </div>
             {% endfor %}
@@ -124,7 +223,8 @@
                 {% for experience in experiences %}
                 <div class="timeline-item">
                     <h4>{{ experience.job_title }} at {{ experience.company }}</h4>
-                    <p class="text-muted">{{ experience.start_date|date:"M Y" }} - {% if experience.end_date %}{{ experience.end_date|date:"M Y" }}{% else %}Present{% endif %}</p>
+                    <p class="text-muted">{{ experience.start_date|date:"M Y" }} - {% if experience.end_date %}{{
+                        experience.end_date|date:"M Y" }}{% else %}Present{% endif %}</p>
                     <p>{{ experience.description|safe }}</p>
                     <p><strong>Technologies:</strong> {{ experience.technologies }}</p>
                 </div>
@@ -179,7 +279,8 @@
                 <div class="card p-4 h-100">
                     <div class="d-flex align-items-center mb-3">
                         {% if testimonial.profile_image %}
-                            <img src="{{ testimonial.profile_image.url }}" alt="{{ testimonial.client_name }}" class="rounded-circle me-3" style="width: 50px; height: 50px;">
+                        <img src="{{ testimonial.profile_image.url }}" alt="{{ testimonial.client_name }}"
+                            class="rounded-circle me-3" style="width: 50px; height: 50px;">
                         {% endif %}
                         <div>
                             <h6 class="mb-0">{{ testimonial.client_name }}</h6>
@@ -204,17 +305,21 @@
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <input type="text" name="name" class="form-control bg-dark text-light border-secondary" placeholder="Your Name" required>
+                            <input type="text" name="name" class="form-control bg-dark text-light border-secondary"
+                                placeholder="Your Name" required>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <input type="email" name="email" class="form-control bg-dark text-light border-secondary" placeholder="Your Email" required>
+                            <input type="email" name="email" class="form-control bg-dark text-light border-secondary"
+                                placeholder="Your Email" required>
                         </div>
                     </div>
                     <div class="mb-3">
-                        <input type="text" name="subject" class="form-control bg-dark text-light border-secondary" placeholder="Subject" required>
+                        <input type="text" name="subject" class="form-control bg-dark text-light border-secondary"
+                            placeholder="Subject" required>
                     </div>
                     <div class="mb-3">
-                        <textarea name="message" class="form-control bg-dark text-light border-secondary" rows="5" placeholder="Your Message" required></textarea>
+                        <textarea name="message" class="form-control bg-dark text-light border-secondary" rows="5"
+                            placeholder="Your Message" required></textarea>
                     </div>
                     <button type="submit" class="btn btn-custom">Send Message</button>
                 </form>
@@ -222,4 +327,15 @@
         </div>
     </div>
 </section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const progressBars = document.querySelectorAll('.progress-bar[data-width]');
+        progressBars.forEach(bar => {
+            bar.style.width = bar.dataset.width + '%';
+        });
+    });
+</script>
 {% endblock %}
