@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Testimonials - Portfolio{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h2 class="text-center mb-5"><span class="text-code-purple">class</span> <span
+        class="class-name">Testimonials</span>:</h2>
+
+    <div class="row">
+      {% for testimonial in testimonials %}
+      <div class="col-lg-6 mb-4">
+        <div class="card h-100 p-4 border-0 glass-panel">
+          <div class="card-body">
+            <div class="d-flex align-items-center mb-4">
+              {% if testimonial.profile_image %}
+              <img src="{{ testimonial.profile_image.url }}" alt="{{ testimonial.client_name }}"
+                class="rounded-circle me-3"
+                style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--accent-color);">
+              {% else %}
+              <div class="rounded-circle me-3 d-flex align-items-center justify-content-center bg-dark"
+                style="width: 60px; height: 60px; border: 2px solid var(--text-secondary);">
+                <i class="fas fa-user text-secondary"></i>
+              </div>
+              {% endif %}
+              <div>
+                <h5 class="card-title mb-0 text-code-green">{{ testimonial.client_name }}</h5>
+                <p class="card-text text-muted small mb-0">{{ testimonial.role_company }}</p>
+              </div>
+            </div>
+            <div class="position-relative">
+              <i class="fas fa-quote-left position-absolute top-0 start-0 text-secondary opacity-25 fa-2x"></i>
+              <p class="card-text pt-4 px-3 fst-italic">"{{ testimonial.feedback }}"</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="col-12 text-center">
+        <p class="text-muted">No testimonials found yet.</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -17,13 +17,13 @@
 - [x] Update portfolio_app/urls.py: Add paths for new sections
 
 ## Templates
-- [ ] Update Templates/base.html: Switch to dark theme
-- [ ] Update Templates/home.html: Add new sections (Hero with CTA, About with details, Skills with categories, etc.)
-- [ ] Update other templates: about.html, projects.html, services.html, contact.html
+- [x] Update Templates/base.html: Switch to dark theme
+- [x] Update Templates/home.html: Add new sections (Hero with CTA, About with details, Skills with categories, etc.)
+- [x] Update other templates: about.html, projects.html, services.html, contact.html
 - [x] Create new templates: timeline.html (experience.html), tools.html, testimonials.html, blog.html, blog_detail.html
 
 ## Static Files
-- [ ] Enhance static/css/style.css: Dark theme, glassmorphism, animations
+- [x] Enhance static/css/style.css: Dark theme, glassmorphism, animations
 
 ## Settings
 - [x] Update portfolio_project/settings.py: Ensure media handling, security
@@ -35,6 +35,14 @@
 - [x] Create README.md with setup instructions
 
 ## Testing and Deployment Prep
-- [ ] Test all new views and templates
-- [ ] Ensure responsive design and dark theme
-- [ ] Run collectstatic for deployment
+- [x] Test all new views and templates
+- [x] Ensure responsive design and dark theme
+- [x] Run collectstatic for deployment
+
+## Current Progress
+- [x] Update about.html to dark theme
+- [x] Update projects.html to dark theme
+- [x] Update services.html to dark theme
+- [x] Update contact.html to dark theme
+- [x] Enhance CSS with more glassmorphism and animations
+- [x] Test site functionality

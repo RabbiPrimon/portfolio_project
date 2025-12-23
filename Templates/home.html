@@ -167,16 +167,12 @@
                     <hr class="border-secondary">
                     <div class="row">
                         <div class="col-sm-6">
-                            <p><span class="keyword">var</span> experience = <span class="text-code-yellow">{{
-                                    profile.years_of_experience }}</span>;</p>
-                            <p><span class="keyword">const</span> location = <span class="string">"{{ profile.location
-                                    }}"</span>;</p>
+                            <p><span class="keyword">var</span> experience = <span class="text-code-yellow">{{ profile.years_of_experience }}</span>;</p>
+                            <p><span class="keyword">const</span> location = <span class="string">"{{ profile.location }}"</span>;</p>
                         </div>
                         <div class="col-sm-6">
-                            <p><span class="keyword">let</span> email = <span class="string">"{{ profile.email
-                                    }}"</span>;</p>
-                            <p><span class="keyword">bool</span> freelance = <span class="keyword">{% if
-                                    profile.freelance_available %}true{% else %}false{% endif %}</span>;</p>
+                            <p><span class="keyword">let</span> email = <span class="string">"{{ profile.email }}"</span>;</p>
+                            <p><span class="keyword">bool</span> freelance = <span class="keyword">{% if profile.freelance_available %}true{% else %}false{% endif %}</span>;</p>
                         </div>
                     </div>
                 </div>

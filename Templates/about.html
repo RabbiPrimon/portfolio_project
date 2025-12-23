@@ -4,30 +4,117 @@
 {% block title %}About Me - Portfolio{% endblock %}
 
 {% block content %}
+<style>
+    .terminal-window {
+        background: #1e1e1e;
+        border-radius: 8px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        border: 1px solid #333;
+        font-family: 'JetBrains Mono', monospace;
+        overflow: hidden;
+    }
+
+    .terminal-header {
+        background: #252526;
+        padding: 10px 15px;
+        border-bottom: 1px solid #333;
+        display: flex;
+        gap: 8px;
+    }
+
+    .terminal-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+    }
+
+    .dot-red {
+        background: #ff5f56;
+    }
+
+    .dot-yellow {
+        background: #ffbd2e;
+    }
+
+    .dot-green {
+        background: #27c93f;
+    }
+
+    .terminal-body {
+        padding: 20px;
+        color: #d4d4d4;
+    }
+
+    .code-line {
+        margin-bottom: 5px;
+    }
+
+    .keyword {
+        color: #569cd6;
+    }
+
+    .string {
+        color: #ce9178;
+    }
+
+    .class-name {
+        color: #4ec9b0;
+    }
+
+    .function {
+        color: #dcdcaa;
+    }
+
+    .comment {
+        color: #6a9955;
+    }
+</style>
+
 <!-- About Section -->
-<section class="py-5">
+<section id="about" class="section">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6">
-                {% if profile %}
-                    <h1 class="display-4 fw-bold">{{ profile.name }}</h1>
-                    <h2 class="h3 mb-4">{{ profile.role }}</h2>
-                    <p class="lead mb-4">{{ profile.bio }}</p>
-                    {% if profile.resume %}
-                        <a href="{{ profile.resume.url }}" target="_blank" class="btn btn-primary btn-lg">Download Resume</a>
-                    {% endif %}
-                {% else %}
-                    <h1 class="display-4 fw-bold">About Me</h1>
-                    <p class="lead mb-4">Learn more about my background and experience.</p>
-                {% endif %}
-            </div>
-            <div class="col-lg-6 text-center">
-                {% if profile and profile.profile_photo %}
-                    <img src="{{ profile.profile_photo.url }}" alt="{{ profile.name }}" class="img-fluid rounded-circle shadow" style="max-width: 300px;">
-                {% else %}
-                    <div class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 300px; height: 300px;">
-                        <i class="fas fa-user fa-5x text-secondary"></i>
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="terminal-dot dot-red"></div>
+                        <div class="terminal-dot dot-yellow"></div>
+                        <div class="terminal-dot dot-green"></div>
                     </div>
+                    <div class="terminal-body">
+                        {% if profile %}
+                        <div class="code-line"><span class="keyword">class</span> <span class="class-name">{{ profile.name }}</span>:</div>
+                        <div class="code-line">    <span class="keyword">def</span> <span class="function">__init__</span>(self):</div>
+                        <div class="code-line">        self.role = <span class="string">"{{ profile.role }}"</span></div>
+                        <div class="code-line">        self.bio = <span class="string">"{{ profile.bio|truncatechars:100 }}"</span></div>
+                        <div class="code-line">        self.experience = <span class="string">"{{ profile.years_of_experience }} years"</span></div>
+                        <div class="code-line">        self.location = <span class="string">"{{ profile.location }}"</span></div>
+                        {% else %}
+                        <div class="code-line"><span class="keyword">class</span> <span class="class-name">Developer</span>:</div>
+                        <div class="code-line">    <span class="keyword">def</span> <span class="function">__init__</span>(self):</div>
+                        <div class="code-line">        self.name = <span class="string">"Unknown"</span></div>
+                        <div class="code-line">        self.role = <span class="string">"Developer"</span></div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                {% if profile %}
+                <h1 class="display-4 fw-bold mb-3"><span class="text-code-purple">print</span>(<span class="string">"About {{ profile.name }}"</span>)</h1>
+                <p class="lead text-code-green">// {{ profile.bio|safe }}</p>
+                <div class="row mt-4">
+                    <div class="col-sm-6">
+                        <p><span class="keyword">var</span> experience = <span class="text-code-yellow">{{ profile.years_of_experience }}</span>;</p>
+                        <p><span class="keyword">const</span> location = <span class="string">"{{ profile.location }}"</span>;</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p><span class="keyword">let</span> email = <span class="string">"{{ profile.email }}"</span>;</p>
+                        <p><span class="keyword">bool</span> freelance = <span class="keyword">{% if profile.freelance_available %}true{% else %}false{% endif %}</span>;</p>
+                    </div>
+                </div>
+                {% else %}
+                <h1 class="display-4 fw-bold"> > About Me_</h1>
+                <p class="lead text-code-green">// Learn more about my background and experience.</p>
                 {% endif %}
             </div>
         </div>
@@ -35,23 +122,39 @@
 </section>
 
 <!-- Skills Section -->
-<section class="bg-light py-5">
+<section id="skills" class="section bg-secondary">
     <div class="container">
-        <h2 class="text-center mb-5">My Skills</h2>
+        <h2 class="text-center mb-5"><span class="text-code-purple">def</span> <span class="function">get_skills</span>():</h2>
         <div class="row">
             {% for skill in skills %}
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ skill.name }}</h5>
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: {{ skill.proficiency }}%" aria-valuenow="{{ skill.proficiency }}" aria-valuemin="0" aria-valuemax="100">{{ skill.proficiency }}%</div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card p-3 h-100">
+                    <div class="d-flex align-items-center mb-3">
+                        {% if skill.icon %}<i class="{{ skill.icon }} fs-2 me-3 text-code-green"></i>{% endif %}
+                        <div>
+                            <h5 class="mb-1">{{ skill.name }}</h5>
+                            <small class="text-muted">{{ skill.category|title }}</small>
                         </div>
                     </div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" data-width="{{ skill.proficiency }}" aria-valuenow="{{ skill.proficiency }}" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <p class="mt-2 mb-0 text-end font-monospace">{{ skill.proficiency }}%</p>
                 </div>
             </div>
             {% endfor %}
         </div>
     </div>
 </section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const progressBars = document.querySelectorAll('.progress-bar[data-width]');
+        progressBars.forEach(bar => {
+            bar.style.width = bar.dataset.width + '%';
+        });
+    });
+</script>
 {% endblock %}

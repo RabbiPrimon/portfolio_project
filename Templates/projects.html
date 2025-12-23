@@ -4,38 +4,83 @@
 {% block title %}Projects - Portfolio{% endblock %}
 
 {% block content %}
-<section class="py-5">
+<style>
+    .project-card {
+        transition: all 0.3s ease;
+        border: 1px solid var(--border-color);
+        background-color: var(--bg-secondary);
+    }
+
+    .project-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        border-color: var(--accent-color);
+    }
+
+    .project-image {
+        height: 200px;
+        object-fit: cover;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .project-placeholder {
+        height: 200px;
+        background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-secondary) 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .tech-stack {
+        font-family: var(--font-mono);
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+    }
+
+    .project-links {
+        border-top: 1px solid var(--border-color);
+        background-color: var(--bg-tertiary);
+    }
+</style>
+
+<section id="projects" class="section">
     <div class="container">
-        <h1 class="text-center mb-5">My Projects</h1>
+        <h1 class="text-center mb-5"><span class="text-code-purple">git</span> <span class="keyword">clone</span> <span class="string">my-projects</span></h1>
         <div class="row">
             {% for project in projects %}
             <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card h-100 shadow-sm">
-                    {% if project.image %}
-                        <img src="{{ project.image.url }}" class="card-img-top" alt="{{ project.title }}" style="height: 200px; object-fit: cover;">
+                <div class="card project-card h-100">
+                    {% if project.thumbnail %}
+                        <img src="{{ project.thumbnail.url }}" class="project-image w-100" alt="{{ project.title }}">
                     {% else %}
-                        <div class="bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
-                            <i class="fas fa-project-diagram fa-3x text-secondary"></i>
+                        <div class="project-placeholder">
+                            <i class="fas fa-code fa-3x text-code-green"></i>
                         </div>
                     {% endif %}
                     <div class="card-body">
-                        <h5 class="card-title">{{ project.title }}</h5>
-                        <p class="card-text">{{ project.description|truncatechars:150 }}</p>
-                        <p class="text-muted small">
-                            <strong>Tech Stack:</strong> {{ project.tech_stack }}
-                        </p>
+                        <h5 class="card-title text-code-green">{{ project.title }}</h5>
+                        <p class="card-text text-secondary">{{ project.description|truncatechars:150 }}</p>
+                        <div class="tech-stack mb-3">
+                            <strong class="text-code-purple">Tech:</strong> {{ project.tech_stack }}
+                        </div>
+                        {% if project.category %}
+                        <span class="badge bg-primary">{{ project.category|title }}</span>
+                        {% endif %}
                     </div>
-                    <div class="card-footer bg-transparent">
-                        <div class="d-flex justify-content-between">
-                            <a href="{% url 'project_detail' project.pk %}" class="btn btn-primary btn-sm">View Details</a>
+                    <div class="card-footer project-links">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="{% url 'project_detail' project.pk %}" class="btn btn-primary btn-sm">
+                                <i class="fas fa-eye me-1"></i>View Details
+                            </a>
                             <div>
                                 {% if project.github_link %}
-                                    <a href="{{ project.github_link }}" target="_blank" class="btn btn-outline-secondary btn-sm me-1">
+                                    <a href="{{ project.github_link }}" target="_blank" class="btn btn-outline-secondary btn-sm me-1" title="GitHub">
                                         <i class="fab fa-github"></i>
                                     </a>
                                 {% endif %}
                                 {% if project.demo_link %}
-                                    <a href="{{ project.demo_link }}" target="_blank" class="btn btn-outline-success btn-sm">
+                                    <a href="{{ project.demo_link }}" target="_blank" class="btn btn-outline-success btn-sm" title="Live Demo">
                                         <i class="fas fa-external-link-alt"></i>
                                     </a>
                                 {% endif %}
@@ -48,7 +93,17 @@
         </div>
         {% if not projects %}
             <div class="text-center">
-                <p class="text-muted">No projects available yet.</p>
+                <div class="terminal-window d-inline-block p-4">
+                    <div class="terminal-header">
+                        <div class="terminal-dot dot-red"></div>
+                        <div class="terminal-dot dot-yellow"></div>
+                        <div class="terminal-dot dot-green"></div>
+                    </div>
+                    <div class="terminal-body text-center">
+                        <p class="text-secondary mb-0">No projects found in repository</p>
+                        <p class="text-code-green">$ git init new-project</p>
+                    </div>
+                </div>
             </div>
         {% endif %}
     </div>
