@@ -155,22 +155,7 @@ class Tool(models.Model):
     def __str__(self):
         return self.name
 
-class Testimonial(models.Model):
-    client_name = models.CharField(max_length=100)
-    role_company = models.CharField(max_length=200)
-    feedback = RichTextField()
-    profile_image = models.ImageField(upload_to='testimonials/', blank=True, null=True)
-    certificate_image = models.ImageField(upload_to='certificates/', blank=True, null=True)
-    display_order = models.PositiveIntegerField(default=0)
-    is_active = models.BooleanField(default=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
-    class Meta:
-        ordering = ['display_order']
-
-    def __str__(self):
-        return f"{self.client_name} - {self.role_company}"
 
 class BlogPost(models.Model):
     title = models.CharField(max_length=200)

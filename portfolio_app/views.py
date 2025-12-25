@@ -8,19 +8,37 @@ from .forms import ContactForm
 
 def home(request):
     profile = Profile.objects.first()
-    skills = Skill.objects.all()
+    skills = list(Skill.objects.all())
     experiences = Experience.objects.all()
     services = Service.objects.filter(is_active=True)
     tools = Tool.objects.all()
     projects = Project.objects.all()
     education = Education.objects.all()
+
+    # Merge services and tools into skills for unified display
+    for service in services:
+        skills.append(type('Skill', (), {
+            'name': service.title,
+            'icon': service.icon,
+            'category': 'service',
+            'proficiency': 100,  # Assume full proficiency for services
+            'id': f'service_{service.id}'
+        })())
+
+    for tool in tools:
+        skills.append(type('Skill', (), {
+            'name': tool.name,
+            'icon': tool.icon,
+            'category': 'tool',
+            'proficiency': 100,  # Assume full proficiency for tools
+            'id': f'tool_{tool.id}'
+        })())
+
     return render(request, 'home.html', {
         'profile': profile,
         'skills': skills,
         'experiences': experiences,
         'education': education,
-        'services': services,
-        'tools': tools,
         'projects': projects,
     })
 

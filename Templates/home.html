@@ -106,33 +106,20 @@
                     <div class="skill-card h-100">
                         <i class="{{ skill.icon }} mb-3 fs-3 text-secondary"></i>
                         <h4 class="h6 font-monospace mb-2">{{ skill.name }}</h4>
+                        {% if skill.category == 'service' %}
+                        <p class="small text-muted mb-0">{{ skill.description|striptags|truncatechars:50 }}</p>
+                        {% else %}
                         <div class="progress" style="height: 4px; background: #161b22;">
                             <div class="progress-bar"
                                 style="width: {{ skill.proficiency }}%; background: var(--py-blue);"></div>
                         </div>
-                    </div>
-                </div>
-                {% endfor %}
-
-                {% for service in services %}
-                <div class="col-lg-3 col-md-4 tech-item" data-category="service">
-                    <div class="skill-card service h-100">
-                        <i class="{{ service.icon }} mb-3 fs-3 text-secondary"></i>
-                        <h4 class="h6 font-monospace mb-2">{{ service.title }}</h4>
-                        <p class="small text-muted mb-0">{{ service.description|striptags|truncatechars:50 }}</p>
-                    </div>
-                </div>
-                {% endfor %}
-
-                {% for tool in tools %}
-                <div class="col-lg-3 col-md-4 tech-item" data-category="tool">
-                    <div class="skill-card tool h-100">
-                        <i class="{{ tool.icon }} mb-3 fs-3 text-secondary"></i>
-                        <h4 class="h6 font-monospace mb-2">{{ tool.name }}</h4>
+                        {% endif %}
+                        {% if skill.category == 'tool' %}
                         <span class="badge"
                             style="background: rgba(68, 183, 139, 0.1); color: var(--django-light); border: 1px solid var(--django-light);">
-                            {{ tool.category }}
+                            {{ skill.category }}
                         </span>
+                        {% endif %}
                     </div>
                 </div>
                 {% endfor %}
@@ -242,7 +229,7 @@
 </section>
 
 <!-- Contact Section -->
-<section id="contact" class="section">
+<section id="contact" class="section contact-section">
     <div class="container" data-aos="fade-up">
         <div class="row justify-content-center">
             <div class="col-lg-6 text-center mb-5">
@@ -251,33 +238,26 @@
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-lg-8">
+            <div class="col-lg-8 contact-form-container">
                 <div class="glass-card">
-                    <form action="{% url 'contact' %}" method="POST">
+                    <form action="{% url 'contact' %}" method="POST" class="contact-form">
                         {% csrf_token %}
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label class="form-label font-monospace small">name = </label>
-                                <input type="text" name="name" class="form-control bg-dark border-secondary text-light"
-                                    required placeholder='"Your Name"'>
+                                <input type="text" name="name" class="form-control" required placeholder='"Your Name"'>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label font-monospace small">email = </label>
-                                <input type="email" name="email"
-                                    class="form-control bg-dark border-secondary text-light" required
-                                    placeholder='"your@email.com"'>
+                                <input type="email" name="email" class="form-control" required placeholder='"your@email.com"'>
                             </div>
                             <div class="col-12">
                                 <label class="form-label font-monospace small">subject = </label>
-                                <input type="text" name="subject"
-                                    class="form-control bg-dark border-secondary text-light" required
-                                    placeholder='"Inquiry Specification"'>
+                                <input type="text" name="subject" class="form-control" required placeholder='"Inquiry Specification"'>
                             </div>
                             <div class="col-12">
                                 <label class="form-label font-monospace small">message = </label>
-                                <textarea name="message" rows="5"
-                                    class="form-control bg-dark border-secondary text-light" required
-                                    placeholder='""" Your multi-line message here """'></textarea>
+                                <textarea name="message" rows="5" class="form-control" required placeholder='""" Your multi-line message here """'></textarea>
                             </div>
                             <div class="col-12 text-center mt-4">
                                 <button type="submit" class="btn btn-py w-100">request.post()</button>
