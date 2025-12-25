@@ -4,8 +4,23 @@ from .models import Profile, Skill, Experience, Education, Project, ProjectImage
 from ckeditor.widgets import CKEditorWidget
 from django import forms
 
+class EducationAdminForm(forms.ModelForm):
+    start_date = forms.DateField(
+        input_formats=['%d/%m/%Y', '%Y-%m-%d'],
+        widget=forms.DateInput(attrs={'placeholder': 'DD/MM/YYYY'}, format='%d/%m/%Y')
+    )
+    end_date = forms.DateField(
+        required=False,
+        input_formats=['%d/%m/%Y', '%Y-%m-%d'],
+        widget=forms.DateInput(attrs={'placeholder': 'DD/MM/YYYY'}, format='%d/%m/%Y')
+    )
+
+    class Meta:
+        model = Education
+        fields = '__all__'
+
 class EducationAdmin(admin.ModelAdmin):
-    pass
+    form = EducationAdminForm
 
 class ProfileAdmin(admin.ModelAdmin):
     pass
@@ -15,6 +30,15 @@ class SkillAdmin(admin.ModelAdmin):
 
 class ExperienceAdminForm(forms.ModelForm):
     description = forms.CharField(widget=CKEditorWidget())
+    start_date = forms.DateField(
+        input_formats=['%d/%m/%Y', '%Y-%m-%d'],
+        widget=forms.DateInput(attrs={'placeholder': 'DD/MM/YYYY'}, format='%d/%m/%Y')
+    )
+    end_date = forms.DateField(
+        required=False,
+        input_formats=['%d/%m/%Y', '%Y-%m-%d'],
+        widget=forms.DateInput(attrs={'placeholder': 'DD/MM/YYYY'}, format='%d/%m/%Y')
+    )
 
     class Meta:
         model = Experience

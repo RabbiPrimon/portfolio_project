@@ -171,18 +171,12 @@
                     <h3 class="h5 mb-1">{{ edu.degree }}</h3>
                     <p class="text-secondary small mb-2">{{ edu.institution }} | {{ edu.location }}</p>
                     <p class="text-muted small mb-0">
-                        {{ edu.start_date|date:"Y" }} -
                         {% if edu.end_date %}
                         {{ edu.end_date|date:"Y" }}
                         {% else %}
                         Present
                         {% endif %}
                     </p>
-                    {% if edu.gpa %}
-                    <div class="mt-2 text-primary">
-                        <span class="badge bg-dark border border-secondary">GPA: {{ edu.gpa }}</span>
-                    </div>
-                    {% endif %}
                 </div>
             </div>
             {% endfor %}
@@ -276,6 +270,8 @@
     function filterTech(category) {
         const items = document.querySelectorAll('.tech-item');
         const tabs = document.querySelectorAll('.skill-tab');
+
+        // Update tab active states
         tabs.forEach(tab => {
             if (tab.innerText.includes(category) || (category === 'all' && tab.innerText === 'all_tech')) {
                 tab.classList.add('active');
@@ -283,14 +279,30 @@
                 tab.classList.remove('active');
             }
         });
+
+        // Filter items with smooth animations
         items.forEach(item => {
             if (category === 'all' || item.getAttribute('data-category') === category) {
-                item.style.display = 'block';
+                // Show item
+                item.classList.remove('fade-out');
+                item.classList.add('fade-in');
+                setTimeout(() => {
+                    item.style.display = 'block';
+                }, 10); // Small delay to allow CSS transition
             } else {
-                item.style.display = 'none';
+                // Hide item
+                item.classList.remove('fade-in');
+                item.classList.add('fade-out');
+                setTimeout(() => {
+                    item.style.display = 'none';
+                }, 400); // Match transition duration
             }
         });
-        AOS.refresh();
+
+        // Refresh AOS animations
+        setTimeout(() => {
+            AOS.refresh();
+        }, 450);
     }
 </script>
 {% endblock %}
