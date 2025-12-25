@@ -61,6 +61,24 @@ class Experience(models.Model):
     def __str__(self):
         return f"{self.job_title} at {self.company}"
 
+class Education(models.Model):
+    degree = models.CharField(max_length=200)
+    institution = models.CharField(max_length=200)
+    location = models.CharField(max_length=200, blank=True)
+    start_date = models.DateField()
+    end_date = models.DateField(blank=True, null=True)
+    description = RichTextField(blank=True)
+    gpa = models.CharField(max_length=20, blank=True)
+    display_order = models.PositiveIntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-start_date', 'display_order']
+
+    def __str__(self):
+        return f"{self.degree} at {self.institution}"
+
 class Service(models.Model):
     title = models.CharField(max_length=200)
     description = RichTextField()

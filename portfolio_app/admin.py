@@ -1,8 +1,11 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import Profile, Skill, Experience, Project, ProjectImage, Service, Tool, Testimonial, BlogPost, ContactMessage
+from .models import Profile, Skill, Experience, Education, Project, ProjectImage, Service, Tool, BlogPost, ContactMessage
 from ckeditor.widgets import CKEditorWidget
 from django import forms
+
+class EducationAdmin(admin.ModelAdmin):
+    pass
 
 class ProfileAdmin(admin.ModelAdmin):
     pass
@@ -33,15 +36,7 @@ class ServiceAdmin(admin.ModelAdmin):
 class ToolAdmin(admin.ModelAdmin):
     pass
 
-class TestimonialAdminForm(forms.ModelForm):
-    message = forms.CharField(widget=CKEditorWidget())
 
-    class Meta:
-        model = Testimonial
-        fields = '__all__'
-
-class TestimonialAdmin(admin.ModelAdmin):
-    form = TestimonialAdminForm
 
 class BlogPostAdminForm(forms.ModelForm):
     content = forms.CharField(widget=CKEditorWidget())
@@ -63,6 +58,7 @@ admin.site.register(Experience, ExperienceAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Service, ServiceAdmin)
 admin.site.register(Tool, ToolAdmin)
-admin.site.register(Testimonial, TestimonialAdmin)
+
+admin.site.register(Education, EducationAdmin)
 admin.site.register(BlogPost, BlogPostAdmin)
 admin.site.register(ContactMessage, ContactMessageAdmin)

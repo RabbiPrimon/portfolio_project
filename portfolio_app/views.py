@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib import messages
 from django.core.paginator import Paginator
-from .models import Profile, Skill, Experience, Project, Service, Tool, Testimonial, BlogPost, ContactMessage
+from .models import Profile, Skill, Experience, Education, Project, Service, Tool, BlogPost, ContactMessage
 from .forms import ContactForm
 
 def home(request):
@@ -12,24 +12,26 @@ def home(request):
     experiences = Experience.objects.all()
     services = Service.objects.filter(is_active=True)
     tools = Tool.objects.all()
-    testimonials = Testimonial.objects.filter(is_active=True)
     projects = Project.objects.all()
+    education = Education.objects.all()
     return render(request, 'home.html', {
         'profile': profile,
         'skills': skills,
         'experiences': experiences,
+        'education': education,
         'services': services,
         'tools': tools,
-        'testimonials': testimonials,
         'projects': projects,
     })
 
 def about(request):
     profile = Profile.objects.first()
     skills = Skill.objects.all()
+    education = Education.objects.all()
     return render(request, 'about.html', {
         'profile': profile,
         'skills': skills,
+        'education': education,
     })
 
 def projects(request):
@@ -83,11 +85,7 @@ def tools(request):
         'tools': tools,
     })
 
-def testimonials(request):
-    testimonials = Testimonial.objects.filter(is_active=True)
-    return render(request, 'testimonials.html', {
-        'testimonials': testimonials,
-    })
+
 
 def blog(request):
     blog_posts = BlogPost.objects.filter(is_published=True)

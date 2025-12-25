@@ -1,160 +1,139 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}About Me - Portfolio{% endblock %}
+{% block title %}About | {{ profile.name }}{% endblock %}
 
 {% block content %}
-<style>
-    .terminal-window {
-        background: #1e1e1e;
-        border-radius: 8px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        border: 1px solid #333;
-        font-family: 'JetBrains Mono', monospace;
-        overflow: hidden;
-    }
-
-    .terminal-header {
-        background: #252526;
-        padding: 10px 15px;
-        border-bottom: 1px solid #333;
-        display: flex;
-        gap: 8px;
-    }
-
-    .terminal-dot {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-    }
-
-    .dot-red {
-        background: #ff5f56;
-    }
-
-    .dot-yellow {
-        background: #ffbd2e;
-    }
-
-    .dot-green {
-        background: #27c93f;
-    }
-
-    .terminal-body {
-        padding: 20px;
-        color: #d4d4d4;
-    }
-
-    .code-line {
-        margin-bottom: 5px;
-    }
-
-    .keyword {
-        color: #569cd6;
-    }
-
-    .string {
-        color: #ce9178;
-    }
-
-    .class-name {
-        color: #4ec9b0;
-    }
-
-    .function {
-        color: #dcdcaa;
-    }
-
-    .comment {
-        color: #6a9955;
-    }
-</style>
-
-<!-- About Section -->
-<section id="about" class="section">
+<section class="section pt-5 mt-5">
     <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6">
-                <div class="terminal-window">
+        <!-- Technical About Page Header -->
+        <div class="row mb-5" data-aos="fade-down">
+            <div class="col-12 text-center">
+                <h1 class="display-4 fw-bold">About <span class="gradient-text">self</span></h1>
+                <p class="text-secondary font-monospace">>>> Inspecting developer metadata...</p>
+            </div>
+        </div>
+
+        <div class="row g-5">
+            <!-- Profile Column -->
+            <div class="col-lg-5" data-aos="fade-right">
+                <div class="terminal-window mb-4">
                     <div class="terminal-header">
                         <div class="terminal-dot dot-red"></div>
                         <div class="terminal-dot dot-yellow"></div>
                         <div class="terminal-dot dot-green"></div>
                     </div>
-                    <div class="terminal-body">
-                        {% if profile %}
-                        <div class="code-line"><span class="keyword">class</span> <span class="class-name">{{ profile.name }}</span>:</div>
-                        <div class="code-line">    <span class="keyword">def</span> <span class="function">__init__</span>(self):</div>
-                        <div class="code-line">        self.role = <span class="string">"{{ profile.role }}"</span></div>
-                        <div class="code-line">        self.bio = <span class="string">"{{ profile.bio|truncatechars:100 }}"</span></div>
-                        <div class="code-line">        self.experience = <span class="string">"{{ profile.years_of_experience }} years"</span></div>
-                        <div class="code-line">        self.location = <span class="string">"{{ profile.location }}"</span></div>
-                        {% else %}
-                        <div class="code-line"><span class="keyword">class</span> <span class="class-name">Developer</span>:</div>
-                        <div class="code-line">    <span class="keyword">def</span> <span class="function">__init__</span>(self):</div>
-                        <div class="code-line">        self.name = <span class="string">"Unknown"</span></div>
-                        <div class="code-line">        self.role = <span class="string">"Developer"</span></div>
+                    <div class="terminal-body p-0">
+                        {% if profile.profile_photo %}
+                        <img src="{{ profile.profile_photo.url }}" alt="{{ profile.name }}" class="img-fluid w-100"
+                            style="object-fit:cover; filter:contrast(110%);">
                         {% endif %}
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-6">
-                {% if profile %}
-                <h1 class="display-4 fw-bold mb-3"><span class="text-code-purple">print</span>(<span class="string">"About {{ profile.name }}"</span>)</h1>
-                <p class="lead text-code-green">// {{ profile.bio|safe }}</p>
-                <div class="row mt-4">
-                    <div class="col-sm-6">
-                        <p><span class="keyword">var</span> experience = <span class="text-code-yellow">{{ profile.years_of_experience }}</span>;</p>
-                        <p><span class="keyword">const</span> location = <span class="string">"{{ profile.location }}"</span>;</p>
-                    </div>
-                    <div class="col-sm-6">
-                        <p><span class="keyword">let</span> email = <span class="string">"{{ profile.email }}"</span>;</p>
-                        <p><span class="keyword">bool</span> freelance = <span class="keyword">{% if profile.freelance_available %}true{% else %}false{% endif %}</span>;</p>
-                    </div>
-                </div>
-                {% else %}
-                <h1 class="display-4 fw-bold"> > About Me_</h1>
-                <p class="lead text-code-green">// Learn more about my background and experience.</p>
-                {% endif %}
-            </div>
-        </div>
-    </div>
-</section>
 
-<!-- Skills Section -->
-<section id="skills" class="section bg-secondary">
-    <div class="container">
-        <h2 class="text-center mb-5"><span class="text-code-purple">def</span> <span class="function">get_skills</span>():</h2>
-        <div class="row">
-            {% for skill in skills %}
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card p-3 h-100">
-                    <div class="d-flex align-items-center mb-3">
-                        {% if skill.icon %}<i class="{{ skill.icon }} fs-2 me-3 text-code-green"></i>{% endif %}
-                        <div>
-                            <h5 class="mb-1">{{ skill.name }}</h5>
-                            <small class="text-muted">{{ skill.category|title }}</small>
+                <div class="glass-card">
+                    <h3 class="h5 mb-4 text-secondary font-monospace">Core Attributes</h3>
+                    <ul class="list-unstyled d-flex flex-column gap-3">
+                        <li class="d-flex align-items-center gap-3">
+                            <i class="fas fa-map-marker-alt text-secondary"></i>
+                            <div>
+                                <small class="text-muted d-block">Location</small>
+                                <span class="font-monospace">{{ profile.location }}</span>
+                            </div>
+                        </li>
+                        <li class="d-flex align-items-center gap-3">
+                            <i class="fas fa-briefcase text-secondary"></i>
+                            <div>
+                                <small class="text-muted d-block">Experience</small>
+                                <span class="font-monospace">{{ profile.years_of_experience }} Years</span>
+                            </div>
+                        </li>
+                        <li class="d-flex align-items-center gap-3">
+                            <i class="fas fa-terminal text-secondary"></i>
+                            <div>
+                                <small class="text-muted d-block">Availability</small>
+                                <span class="badge"
+                                    style="background:rgba(55,118,171,0.1); color:var(--py-blue); border:1px solid var(--py-blue);">
+                                    {% if profile.freelance_available %}
+                                    Available
+                                    {% else %}
+                                    Active on Projects
+                                    {% endif %}
+                                </span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Content Column -->
+            <div class="col-lg-7" data-aos="fade-left">
+                <div class="glass-card h-100">
+                    <div class="about-class mb-4 p-3 bg-dark-subtle rounded border border-secondary"
+                        style="background:#010409 !important;">
+                        <p><span class="keyword">class</span> <span class="function">DeveloperDefinition</span>:</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="docstring">""" Professional background and bio module
+                                """</span></p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span> <span
+                                class="function">__repr__</span>(<span class="keyword">self</span>):</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span
+                                class="string">"{{ profile.name }} | {{ profile.role }}"</span></p>
+                    </div>
+
+                    <div class="about-bio text-light">
+                        {% if profile %}
+                        {{ profile.bio|safe }}
+                        {% endif %}
+                    </div>
+
+                    <div class="mt-5 pt-4 border-top border-secondary">
+                        <h4 class="h6 mb-4 font-monospace text-secondary">Social Interfaces</h4>
+                        <div class="d-flex gap-3">
+                            {% if profile.github %}
+                            <a href="{{ profile.github }}" target="_blank"
+                                class="btn btn-outline-secondary btn-sm font-monospace"><i
+                                    class="fab fa-github me-2"></i>GitHub</a>
+                            {% endif %}
+                            {% if profile.linkedin %}
+                            <a href="{{ profile.linkedin }}" target="_blank"
+                                class="btn btn-outline-secondary btn-sm font-monospace"><i
+                                    class="fab fa-linkedin me-2"></i>LinkedIn</a>
+                            {% endif %}
+                            {% if profile.email %}
+                            <a href="mailto:{{ profile.email }}"
+                                class="btn btn-outline-secondary btn-sm font-monospace"><i
+                                    class="fas fa-envelope me-2"></i>Email</a>
+                            {% endif %}
                         </div>
                     </div>
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" data-width="{{ skill.proficiency }}" aria-valuenow="{{ skill.proficiency }}" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <p class="mt-2 mb-0 text-end font-monospace">{{ skill.proficiency }}%</p>
                 </div>
             </div>
-            {% endfor %}
+        </div>
+
+        <!-- Education Recap (Quick Import) -->
+        <div class="row mt-5 pt-5" data-aos="fade-up">
+            <div class="col-12">
+                <h2 class="display-6 mb-5"><span class="prompt">>>></span> import academic_history</h2>
+                <div class="row g-4">
+                    {% for edu in education %}
+                    <div class="col-md-4">
+                        <div class="glass-card py-3">
+                            <h4 class="h6 mb-1 text-secondary">{{ edu.degree }}</h4>
+                            <p class="small text-muted mb-0">{{ edu.institution }}</p>
+                            <p class="small text-muted mb-0">
+                                {{ edu.start_date|date:"Y" }} -
+                                {% if edu.end_date %}
+                                {{ edu.end_date|date:"Y" }}
+                                {% else %}
+                                Present
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </div>
 </section>
-{% endblock %}
-
-{% block extra_js %}
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const progressBars = document.querySelectorAll('.progress-bar[data-width]');
-        progressBars.forEach(bar => {
-            bar.style.width = bar.dataset.width + '%';
-        });
-    });
-</script>
 {% endblock %}
