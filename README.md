@@ -7,7 +7,7 @@ A fully dynamic, modern, dark-themed portfolio website built with Django MVT arc
 - **Dark Futuristic UI** with glassmorphism effects
 - **100% Admin-Driven** content management
 - **Responsive Design** for all devices
-- **Dynamic Sections**: Hero, About, Skills, Experience Timeline, Services, Projects, Tools, Testimonials, Blog, Contact
+- **Dynamic Sections**: Hero, About, Capabilities, Experience Timeline, Projects, Testimonials, Blog, Contact
 - **Rich Text Editing** with CKEditor
 - **Image Uploads** and media management
 - **SEO-Friendly** URLs and structure

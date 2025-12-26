@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import Profile, Skill, Experience, Education, Project, ProjectImage, Service, Tool, BlogPost, ContactMessage
+from .models import Profile, Skill, Experience, Education, Project, ProjectImage, BlogPost, ContactMessage
 from ckeditor.widgets import CKEditorWidget
 from django import forms
 
@@ -54,11 +54,7 @@ class ProjectImageInline(admin.TabularInline):
 class ProjectAdmin(admin.ModelAdmin):
     inlines = [ProjectImageInline]
 
-class ServiceAdmin(admin.ModelAdmin):
-    pass
 
-class ToolAdmin(admin.ModelAdmin):
-    pass
 
 
 
@@ -80,8 +76,6 @@ admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Skill, SkillAdmin)
 admin.site.register(Experience, ExperienceAdmin)
 admin.site.register(Project, ProjectAdmin)
-admin.site.register(Service, ServiceAdmin)
-admin.site.register(Tool, ToolAdmin)
 
 admin.site.register(Education, EducationAdmin)
 admin.site.register(BlogPost, BlogPostAdmin)

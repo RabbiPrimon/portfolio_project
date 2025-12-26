@@ -28,6 +28,9 @@ class Skill(models.Model):
         ('backend', 'Backend'),
         ('devops', 'DevOps'),
         ('design', 'Design'),
+        ('database', 'Database'),
+        ('services', 'Services'),
+        ('tools', 'Tools'),
         ('other', 'Other'),
     ]
     name = models.CharField(max_length=100)
@@ -79,21 +82,6 @@ class Education(models.Model):
     def __str__(self):
         return f"{self.degree} at {self.institution}"
 
-class Service(models.Model):
-    title = models.CharField(max_length=200)
-    description = RichTextField()
-    icon = models.CharField(max_length=100, help_text="FontAwesome icon class, e.g., fas fa-code")
-    display_order = models.PositiveIntegerField(default=0)
-    is_active = models.BooleanField(default=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        ordering = ['display_order']
-
-    def __str__(self):
-        return self.title
-
 class Project(models.Model):
     CATEGORY_CHOICES = [
         ('web', 'Web Development'),
@@ -131,31 +119,6 @@ class ProjectImage(models.Model):
 
     def __str__(self):
         return f"Image for {self.project.title}"
-
-class Tool(models.Model):
-    CATEGORY_CHOICES = [
-        ('frontend', 'Frontend'),
-        ('backend', 'Backend'),
-        ('database', 'Database'),
-        ('devops', 'DevOps'),
-        ('design', 'Design'),
-        ('other', 'Other'),
-    ]
-    name = models.CharField(max_length=100)
-    category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, default='other')
-    icon = models.CharField(max_length=100, help_text="FontAwesome icon class", blank=True)
-    tooltip = models.CharField(max_length=200, blank=True)
-    display_order = models.PositiveIntegerField(default=0)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        ordering = ['display_order']
-
-    def __str__(self):
-        return self.name
-
-
 
 class BlogPost(models.Model):
     title = models.CharField(max_length=200)

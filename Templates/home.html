@@ -96,8 +96,8 @@
                 <button class="skill-tab active" onclick="filterTech('all')">all_tech</button>
                 <button class="skill-tab" onclick="filterTech('backend')">backend.py</button>
                 <button class="skill-tab" onclick="filterTech('frontend')">frontend.js</button>
-                <button class="skill-tab" onclick="filterTech('service')">architectural_services</button>
-                <button class="skill-tab" onclick="filterTech('tool')">dev_ops_tools</button>
+                <button class="skill-tab" onclick="filterTech('services')">architectural_services</button>
+                <button class="skill-tab" onclick="filterTech('tools')">dev_ops_tools</button>
             </div>
 
             <div class="row g-4" id="tech-grid">
@@ -106,15 +106,11 @@
                     <div class="skill-card h-100">
                         <i class="{{ skill.icon }} mb-3 fs-3 text-secondary"></i>
                         <h4 class="h6 font-monospace mb-2">{{ skill.name }}</h4>
-                        {% if skill.category == 'service' %}
-                        <p class="small text-muted mb-0">{{ skill.description|striptags|truncatechars:50 }}</p>
-                        {% else %}
                         <div class="progress" style="height: 4px; background: #161b22;">
                             <div class="progress-bar"
                                 style="width: {{ skill.proficiency }}%; background: var(--py-blue);"></div>
                         </div>
-                        {% endif %}
-                        {% if skill.category == 'tool' %}
+                        {% if skill.category == 'tools' %}
                         <span class="badge"
                             style="background: rgba(68, 183, 139, 0.1); color: var(--django-light); border: 1px solid var(--django-light);">
                             {{ skill.category }}
